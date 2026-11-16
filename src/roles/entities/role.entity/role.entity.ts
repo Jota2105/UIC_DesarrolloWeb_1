@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { UserRoles } from "../../../user-roles/entities/user-roles.entity/user-roles.entity.js";
 
-@Entity({ name: 'users'})
+@Entity({ name: 'roles'})
 export class Role{
 
     @PrimaryGeneratedColumn('uuid')
@@ -10,12 +11,18 @@ export class Role{
     nombre: string;
 
     @Column({ type: 'boolean', name: 'estado', default: true })
-    estado: string;
+    estado: boolean;
 
-    @CreateDateColumn({ type: 'timestamp', name: 'fecha_creacion', default: () => 'CURRENT_TIMESTAMP'})
+    @CreateDateColumn({ type: 'timestamp', name: 'fecha_creacion'})
     fechaCreacion: Date;
 
-    @UpdateDateColumn({ type: 'timestamp', name: 'fecha_actualizacion' , default: () => 'CURRENT_TIMESTAMP' })
+    @UpdateDateColumn({ type: 'timestamp', name: 'fecha_actualizacion' })
     fechaActualizacion: Date;
+
+    @OneToMany(
+        () => UserRoles,
+        (userRole) => userRole.role,        
+    )
+    userRoles: UserRoles[];
 
 }

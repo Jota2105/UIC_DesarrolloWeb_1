@@ -1,4 +1,4 @@
-import { CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import { CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, type Relation } from "typeorm";
 import { User } from "../../../users/entities/user.entity/user.entity.js";
 import { Role } from "../../../roles/entities/role.entity/role.entity.js";
 
@@ -13,16 +13,26 @@ export class UserRoles {
 
     @ManyToOne(
         () => User,
-        user => user.userRoles,
+        (user) => user.userRoles,
         {
             onDelete: 'CASCADE',
         }
     )
     @JoinColumn({ name: 'user_id'})
-    user: User;
-    role: Role;
+    user: Relation<User>;
+    
 
-    @CreateDateColumn({ type: 'timestamp', name: 'fecha_asignacion', default: ()=> 'CURRENT_TIMESTAMP' })
+    @ManyToOne(
+        () => Role,
+        (role) => role.userRoles,
+        { onDelete: 'CASCADE' },
+    )
+    @JoinColumn({
+        name: 'role_id',
+    })
+    role: Relation<Role>;
+
+    @CreateDateColumn({ type: 'timestamp', name: 'fecha_asignacion' })
     fechaAsignacion: Date;
 
 }

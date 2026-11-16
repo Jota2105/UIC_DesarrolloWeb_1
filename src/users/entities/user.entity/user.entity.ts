@@ -25,7 +25,7 @@ export class User{
     password: string;
 
     @Column({ type: 'boolean', name: 'estado', default: true })
-    estado: string;
+    estado: boolean;
 
     @CreateDateColumn({ type: 'timestamp', name: 'fecha_creacion', default: () => 'CURRENT_TIMESTAMP'})
     fechaCreacion: Date;
