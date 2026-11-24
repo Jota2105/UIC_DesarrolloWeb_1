@@ -21,7 +21,7 @@ export class User{
     @Column({ type: 'date', name: 'fecha_nacimiento'})
     fechaNacimiento: Date;
 
-    @Column({ type: 'varchar', length: 100, name: 'password'})
+    @Column({ type: 'varchar', length: 100, name: 'password', select: false })
     password: string;
 
     @Column({ type: 'boolean', name: 'estado', default: true })

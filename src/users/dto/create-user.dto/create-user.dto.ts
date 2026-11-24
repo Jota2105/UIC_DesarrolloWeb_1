@@ -1,4 +1,4 @@
-import { IsBoolean, IsEmail, IsOptional, IsString, Length, Matches, MaxLength, MinLength } from "class-validator";
+import { IsBoolean, IsDateString, IsEmail, IsOptional, IsString, Length, Matches, MaxLength, MinLength } from "class-validator";
 
 export class CreateUserDto {
     
@@ -16,6 +16,9 @@ export class CreateUserDto {
     @MaxLength(50, { message: 'Los apellidos no pueden tener más de 50 caracteres' })    
     apellidos: string;
 
+    @IsDateString()
+    fechaNacimiento: Date;
+
     @IsString()
     @Length(5, 20, {message: "El username debe contener entre 5 y 20 caracteres"})
     username: string;
@@ -24,9 +27,18 @@ export class CreateUserDto {
     @MaxLength(50, { message: 'El correo electronnico no debe exceder los 50 caracteres' })
     email:string;
 
+    @IsString()
+    @MinLength(8)
+    @MaxLength(200)
+    password: string;
+
     @IsOptional()
     @IsBoolean({ message: 'El estado debe ser un valor booleano' })
     estado?: boolean;
+
+    @IsOptional()
+    @IsString()
+    creadoPor?: string;
 
 
 }

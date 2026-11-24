@@ -6,9 +6,9 @@ import { Role } from "../../../roles/entities/role.entity/role.entity.js";
 export class UserRoles {
 
     @PrimaryColumn({ type: 'uuid', name: 'user_id'})
-    userId: String;
+    userId: string;
 
-    @PrimaryColumn({ type: 'uuid', name: 'role_id '})
+    @PrimaryColumn({ type: 'uuid', name: 'role_id'})
     roleId: string;
 
     @ManyToOne(
@@ -28,7 +28,7 @@ export class UserRoles {
         { onDelete: 'CASCADE' },
     )
     @JoinColumn({
-        name: 'role_id',
+        name: 'role_id'
     })
     role: Relation<Role>;
 
